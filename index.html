@@ -76,7 +76,38 @@
         </div>
     </div>
 
-<script>let cartItems = [];
+<script>const users = [                                                                                   
+    { username: 'user1', password: 'pass1' },
+    { username: 'user2', password: 'pass2' },
+  ];
+
+  document.getElementById('login-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const username = document.getElementById('login-username').value;
+    const password = document.getElementById('login-password').value;
+    const user = users.find(u => u.username === username && u.password === password);
+
+    if (user) {
+      document.getElementById('login-status').textContent = 'Login successful!';
+    } else {
+      document.getElementById('login-status').textContent = 'Invalid credentials!';
+    }
+  });
+
+  document.getElementById('registration-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const regUsername = document.getElementById('reg-username').value;
+    const regPassword = document.getElementById('reg-password').value;
+
+    if (regUsername === '' || regPassword === '') {
+      document.getElementById('reg-status').textContent = 'Please fill in both fields.';
+    } else {
+      users.push({ username: regUsername, password: regPassword });
+      document.getElementById('reg-status').textContent = 'Registration successful';
+    }
+  });
+	  let cartItems = [];
 
     function addToCart(product, price) {
         cartItems.push({product, price});
